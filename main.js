@@ -1,13 +1,13 @@
 /**
- * Generate text
+ * Generate output from text
  * 
- * @function generateText
+ * @function generateOutput
  * @param {string} text Content to prepare for the output
  * @param {number} count Spacing of the seperated words
  * @return output Mdified text
  * 
 */
-generateText = (text, count) => { 
+generateOutput = (text, count) => { 
   const subindex = text.search(/[.?!]/);
   let output = text.substring(0, subindex + 1) + " ";
   let sentences = text.substring(subindex + 1);

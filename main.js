@@ -8,7 +8,7 @@
 generateText = (text) => { 
   let sentences = text.split(/[.?!]/);
 
-  for (let i = 0; i < sentences.length; i++) {
+  for (let i = 1; i < sentences.length; i++) {
     let words = sentences[i].split(" ");
   
     for (let j = 0; j < words.length; j++) {

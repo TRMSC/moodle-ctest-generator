@@ -11,7 +11,7 @@ generateOutput = (text, count) => {
   const subindex = text.search(/[.?!]/);
   let output = text.substring(0, subindex + 1) + " ";
   let sentences = text.substring(subindex + 1);
-  let words = sentences.match(/[\w']+|[^\s\w']+/g);
+  let words = sentences.match(/[\wÄäÖöÜü']+|[^\s\w']+/g);
 
   for (let j = 0; j < words.length; j++) {
     if (j % count == count - 1 && words[j].match(/^[\w']+$/)) {

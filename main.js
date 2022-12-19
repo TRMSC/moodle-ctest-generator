@@ -7,6 +7,7 @@
 */
 generateText = (text) => { 
   let sentences = text.split(/[.?!]/);
+  console.log(sentences[0]);
 
   for (let i = 1; i < sentences.length; i++) {
     let words = sentences[i].split(" ");
@@ -16,12 +17,11 @@ generateText = (text) => {
         var halfLength = Math.floor(words[j].length / 2);
         var firstHalf = words[j].substring(0, halfLength);
         var secondHalf = words[j].substring(halfLength);
-        document.write(firstHalf + "{" + (j + 1) + ":SHORTANSWER:=" + secondHalf + "} ");
+        console.log(firstHalf + "{" + (j + 1) + ":SHORTANSWER:=" + secondHalf + "} ");
       } else {
-        document.write(words[j] + " ");
+        console.log(words[j] + " ");
       }
     }
-  
-    document.write(".");
+    //console.log(".");
   }
 };

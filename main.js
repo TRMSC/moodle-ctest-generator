@@ -6,25 +6,20 @@
  * 
 */
 generateText = (text) => { 
-  let sentences = text.split(/[.?!]/);
-  let output = (sentences[0]);
-
-  for (let i = 1; i < sentences.length; i++) {
-    let words = sentences[i].split(" ");
+  const subindex = text.search(/[.?!]/);
+  let output = text.substring(0, subindex + 1);
+  let sentences = text.substring(subindex + 1);
+  let words = sentences.split(" ");
   
-    for (let j = 0; j < words.length; j++) {
-      if (j % 3 == 2) {
-        var halfLength = Math.floor(words[j].length / 2);
-        var firstHalf = words[j].substring(0, halfLength);
-        var secondHalf = words[j].substring(halfLength);
-        //console.log(firstHalf + "{" + (j + 1) + ":SHORTANSWER:=" + secondHalf + "} ");
-        output += firstHalf + "{" + (j + 1) + ":SHORTANSWER:=" + secondHalf + "} ";
-      } else {
-        console.log(words[j] + " ");
-        output += words[j] + " ";
-      }
+  for (let j = 0; j < words.length; j++) {
+    if (j % 2 == 1) {
+      let halfLength = Math.ceil(words[j].length / 2);
+      let firstHalf = words[j].substring(0, halfLength);
+      let secondHalf = words[j].substring(halfLength);
+      output += firstHalf + "{" + (j + 1) + ":SHORTANSWER:=" + secondHalf + "} ";
+    } else {
+      output += words[j] + " ";
     }
-    //console.log(".");
   }
   console.log(output);
 };

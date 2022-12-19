@@ -34,3 +34,22 @@ generateOutput = (text, count) => {
   }
   return output;
 };
+
+
+/**
+ * Download quiz
+ * 
+ * @function downloadQuiz
+ * @param {string} input Content to put into thw download file
+ * @param {string} filename Designation for the quiz file
+ * 
+*/
+downloadQuiz = (input, filename) => { 
+  let blob = new Blob([input], {type:'text/plain'});
+  let a = document.createElement("a");
+  a.download = filename + '.txt';
+  a.href = window.URL.createObjectURL(blob);
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+};

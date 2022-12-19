@@ -20,18 +20,17 @@ generateOutput = (text, count) => {
         let firstHalf = words[j].substring(0, halfLength);
         let secondHalf = words[j].substring(halfLength + 1);
         secondHalf.length === 0 ? secondHalf = words[j].substring(halfLength) : null;
-        output += firstHalf + "{1:SHORTANSWER:=" + secondHalf + "} ";
+        output += firstHalf + "{1:SA:=" + secondHalf + "} ";
       } else {
         let halfLength = words[j].length / 2;
         let firstHalf = words[j].substring(0, halfLength);
         let secondHalf = words[j].substring(halfLength);
-        output += firstHalf + "{1:SHORTANSWER:=" + secondHalf + "} ";
+        output += firstHalf + "{1:SA:=" + secondHalf + "} ";
       }
     } else {
       output += words[j] + " ";
       output = output.replace(/\s+([.?!])/g, "$1");
     }
   }
-  console.log(output);
   return output;
 };

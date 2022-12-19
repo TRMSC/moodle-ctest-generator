@@ -19,6 +19,7 @@ generateText = (text, count) => {
         let halfLength = Math.ceil(words[j].length / 2);
         let firstHalf = words[j].substring(0, halfLength);
         let secondHalf = words[j].substring(halfLength + 1);
+        secondHalf.length === 0 ? secondHalf = words[j].substring(halfLength) : null;
         output += firstHalf + "{1:SHORTANSWER:=" + secondHalf + "} ";
       } else {
         let halfLength = words[j].length / 2;

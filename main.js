@@ -4,7 +4,7 @@
  * @function generateOutput
  * @param {string} text Content to prepare for the output
  * @param {number} count Spacing of the seperated words
- * @return output Mdified text
+ * @return output Modified text
  * 
 */
 generateOutput = (text, count) => { 
@@ -29,7 +29,7 @@ generateOutput = (text, count) => {
       }
     } else {
       output += words[j] + " ";
-      output = output.replace(/\s+([.?!])/g, "$1");
+      output.replace(/\s+([.?!])/g, "$1");
     }
   }
   console.log(output);

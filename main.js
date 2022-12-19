@@ -29,7 +29,7 @@ generateOutput = (text, count) => {
       }
     } else {
       output += words[j] + " ";
-      output.replace(/\s+([.?!])/g, "$1");
+      output = output.replace(/\s+([.?!])/g, "$1");
     }
   }
   console.log(output);

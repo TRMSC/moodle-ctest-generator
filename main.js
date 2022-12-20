@@ -11,25 +11,29 @@ generateOutput = (text, count) => {
   const subindex = text.search(/[.?!]/);
   let output = text.substring(0, subindex + 1) + " ";
   let sentences = text.substring(subindex + 1);
-  let words = sentences.match(/[\wÄäÖöÜü']+|[^\s\w']+/g);
+  let words = sentences.match(/[\wÄäÖöÜü'\n]+|[^\s\w']+/g);
 
-  for (let j = 0; j < words.length; j++) {
-    if (j % count == count - 1 && words[j].match(/^[\w']+$/)) {
-      if (words[j].length % 2 == 1) {
-        let halfLength = Math.ceil(words[j].length / 2);
-        let firstHalf = words[j].substring(0, halfLength);
-        let secondHalf = words[j].substring(halfLength + 1);
-        secondHalf.length === 0 ? secondHalf = words[j].substring(halfLength) : null;
-        output += firstHalf + "{1:SA:=" + secondHalf + "} ";
-      } else {
-        let halfLength = words[j].length / 2;
-        let firstHalf = words[j].substring(0, halfLength);
-        let secondHalf = words[j].substring(halfLength);
-        output += firstHalf + "{1:SA:=" + secondHalf + "} ";
-      }
+  for (let i = 0; i < words.length; i++) {
+    if (words[i] === "\n") {
+      output += "\n";
     } else {
-      output += words[j] + " ";
-      output = output.replace(/\s+([.?!])/g, "$1");
+      if (i % count == count - 1 && words[i].match(/^[\w']+$/)) {
+        if (words[i].length % 2 == 1) {
+          let halfLength = Math.ceil(words[i].length / 2);
+          let firstHalf = words[i].substring(0, halfLength);
+          let secondHalf = words[i].substring(halfLength + 1);
+          secondHalf.length === 0 ? secondHalf = words[i].substring(halfLength) : null;
+          output += firstHalf + "{1:SA:=" + secondHalf + "} ";
+        } else {
+          let halfLength = words[i].length / 2;
+          let firstHalf = words[i].substring(0, halfLength);
+          let secondHalf = words[i].substring(halfLength);
+          output += firstHalf + "{1:SA:=" + secondHalf + "} ";
+        }
+      } else {
+        output += words[i] + " ";
+        output = output.replace(/\s+([.?!])/g, "$1");
+      }
     }
   }
   return output;

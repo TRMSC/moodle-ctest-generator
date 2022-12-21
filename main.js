@@ -7,37 +7,52 @@
  * @return output Modified text
  * 
 */
-generateOutput = (text, count) => { 
+generateOutput = (text, interval) => { 
+
   const subindex = text.search(/[.?!]/);
-  let output = text.substring(0, subindex + 1) + " ";
+  let output = text.substring(0, subindex + 1);
   let sentences = text.substring(subindex + 1);
-  let words = sentences.match(/[\wÄäÖöÜü'\n]+|[^\s\w']+/g);
+  let words = sentences.match(/[\wÄäÖöÜü'\n]+|[^\s\w']+|\s/g);
+  let count = 0;
 
   for (let i = 0; i < words.length; i++) {
-    if (words[i] === "\n") {
-      output += "\n";
+
+    if (words[i] === "\n" | words[i].length < 2) {
+      output += words[i];
     } else {
-      if (i % count == count - 1 && words[i].match(/^[\w']+$/)) {
-        if (words[i].length % 2 == 1) {
-          let halfLength = Math.ceil(words[i].length / 2);
-          let firstHalf = words[i].substring(0, halfLength);
-          let secondHalf = words[i].substring(halfLength + 1);
-          secondHalf.length === 0 ? secondHalf = words[i].substring(halfLength) : null;
-          output += firstHalf + "{1:SA:=" + secondHalf + "} ";
-        } else {
-          let halfLength = words[i].length / 2;
-          let firstHalf = words[i].substring(0, halfLength);
-          let secondHalf = words[i].substring(halfLength);
-          output += firstHalf + "{1:SA:=" + secondHalf + "} ";
-        }
-      } else {
-        output += words[i] + " ";
-        output = output.replace(/\s+([.?!])/g, "$1");
-      }
+      count++;
+      output += count < interval 
+        ? words[i] 
+        : ( count = 0, prepareGap(words[i]) );
     }
+
   }
+
   return output;
+
 };
+
+
+
+/**
+ * Prepare gap
+ * 
+ * @function prepareGap
+ * @param {string} element Content to prepare for the output
+ * @return modified element
+ * 
+*/
+prepareGap = (element) => {
+
+  let halfLength = element.length % 2 == 1 
+    ? Math.ceil(element.length / 2) 
+    : element.length / 2;
+  let firstHalf = element.substring(0, halfLength);
+  let secondHalf = element.substring(halfLength);
+  return firstHalf + "{1:SA:=" + secondHalf + "}";
+
+};
+
 
 
 /**
@@ -49,6 +64,7 @@ generateOutput = (text, count) => {
  * 
 */
 downloadQuiz = (input, filename) => { 
+
   let blob = new Blob([input], {type:'text/plain'});
   let a = document.createElement("a");
   a.download = filename + '.txt';
@@ -56,4 +72,5 @@ downloadQuiz = (input, filename) => {
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
+
 };

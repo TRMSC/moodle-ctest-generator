@@ -8,35 +8,30 @@
  * 
 */
 generateOutput = (text, interval) => { 
+
   const subindex = text.search(/[.?!]/);
   let output = text.substring(0, subindex + 1) + " ";
   let sentences = text.substring(subindex + 1);
   let words = sentences.match(/[\wÄäÖöÜü'\n]+|[^\s\w']+|\s/g);
   let count = 0;
 
-  // handle every array entry
   for (let i = 0; i < words.length; i++) {
 
-    // check if entry is a break, space, special char or a short word
     if (words[i] === "\n" | words[i].length < 2) {
       output += words[i];
     } else {
       count++;
-
-      // check interval and modify
-      if (count < interval) {
-        output += words[i];
-      } else {
-        count = 0;
-        output += prepareGap(words[i]);
-      }
-
+      output += count < interval 
+        ? words[i] 
+        : ( count = 0, prepareGap(words[i]) );
     }
 
   }
   console.log(output);
   return output;
+
 };
+
 
 
 /**
@@ -48,13 +43,16 @@ generateOutput = (text, interval) => {
  * 
 */
 prepareGap = (element) => {
+
   let halfLength = element.length % 2 == 1 
     ? Math.ceil(element.length / 2) 
     : element.length / 2;
   let firstHalf = element.substring(0, halfLength);
   let secondHalf = element.substring(halfLength);
   return firstHalf + "{1:SA:=" + secondHalf + "}";
+
 };
+
 
 
 /**
@@ -66,6 +64,7 @@ prepareGap = (element) => {
  * 
 */
 downloadQuiz = (input, filename) => { 
+
   let blob = new Blob([input], {type:'text/plain'});
   let a = document.createElement("a");
   a.download = filename + '.txt';
@@ -73,4 +72,5 @@ downloadQuiz = (input, filename) => {
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
+
 };

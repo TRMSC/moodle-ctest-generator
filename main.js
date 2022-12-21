@@ -10,7 +10,6 @@ window.onload = () => {
 
   // handle toggle and its content
   checkToggle();
-  document.getElementById('autogenerate').addEventListener('click', checkToggle);
 
   // add version to footer
   document.getElementById("version").innerHTML = version;
@@ -19,6 +18,11 @@ window.onload = () => {
   let time = new Date();
   let year = time.getFullYear();
   document.getElementById("year").innerHTML = year;
+
+  // add event listeners
+  document.getElementById('autogenerate').addEventListener('click', checkToggle);
+  document.getElementById('generate-auto').addEventListener('click', handleAuto);
+  document.getElementById('generate-manual').addEventListener('click', handleManual);
 
 };
 
@@ -58,6 +62,33 @@ let checkToggle = function() {
         document.getElementById('auto').style.display = 'none';
     }
   }
+
+};
+
+
+/**
+ * Handle progress for auto generating
+ * 
+ * @function handleAuto
+ * 
+ */
+handleAuto = () => {
+
+  console.log('handle progress for auto generating');
+
+};
+
+
+
+/**
+ * Handle progress for manual generating
+ * 
+ * @function handleManual
+ * 
+ */
+handleManual = () => {
+
+  console.log('handle progress for manual generating');
 
 };
 

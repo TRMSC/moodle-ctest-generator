@@ -67,7 +67,8 @@ let checkToggle = function() {
  * Check text content of necessary inputs
  * 
  * @function checkContent
- * @param stringArray
+ * @param {array} stringArray all necessary inputs
+ * @return {boolean} state of text content
  * 
  */
 checkContent = (stringArray) => {

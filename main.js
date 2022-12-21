@@ -7,32 +7,59 @@
  * @return output Modified text
  * 
 */
-generateOutput = (text, count) => { 
+generateOutput = (text, interval) => { 
   const subindex = text.search(/[.?!]/);
   let output = text.substring(0, subindex + 1) + " ";
   let sentences = text.substring(subindex + 1);
-  let words = sentences.match(/[\wÄäÖöÜü']+|[^\s\w']+/g);
+  let words = sentences.match(/[\wÄäÖöÜü'\n]+|[^\s\w']+|\s/g);
+  let count = 0;
 
-  for (let j = 0; j < words.length; j++) {
-    if (j % count == count - 1 && words[j].match(/^[\w']+$/)) {
-      if (words[j].length % 2 == 1) {
-        let halfLength = Math.ceil(words[j].length / 2);
-        let firstHalf = words[j].substring(0, halfLength);
-        let secondHalf = words[j].substring(halfLength + 1);
-        secondHalf.length === 0 ? secondHalf = words[j].substring(halfLength) : null;
-        output += firstHalf + "{1:SA:=" + secondHalf + "} ";
-      } else {
-        let halfLength = words[j].length / 2;
-        let firstHalf = words[j].substring(0, halfLength);
-        let secondHalf = words[j].substring(halfLength);
-        output += firstHalf + "{1:SA:=" + secondHalf + "} ";
-      }
+  // handle every array entry
+  for (let i = 0; i < words.length; i++) {
+
+    // check if entry is a break, space, special char or a short word
+    if (words[i] === "\n" | words[i].length < 2) {
+      output += words[i];
     } else {
-      output += words[j] + " ";
-      output = output.replace(/\s+([.?!])/g, "$1");
+      count++;
+
+      // check interval and modify
+      if (count < interval) {
+        output += words[i];
+      } else {
+        count = 0;
+        output += prepareGap(words[i]);
+      }
+
     }
+
   }
+  console.log(output);
   return output;
+};
+
+
+/**
+ * Prepare gap
+ * 
+ * @function prepareGap
+ * @param {string} element Content to prepare for the output
+ * @return modified element
+ * 
+*/
+prepareGap = (element) => {
+  if (element.length % 2 == 1) {
+    let halfLength = Math.ceil(element.length / 2);
+    let firstHalf = element.substring(0, halfLength);
+    let secondHalf = element.substring(halfLength + 1);
+    secondHalf.length === 0 ? secondHalf = element.substring(halfLength) : null;
+    return firstHalf + "{1:SA:=" + secondHalf + "}";
+  } else {
+    let halfLength = element.length / 2;
+    let firstHalf = element.substring(0, halfLength);
+    let secondHalf = element.substring(halfLength);
+    return firstHalf + "{1:SA:=" + secondHalf + "}";
+  }
 };
 
 

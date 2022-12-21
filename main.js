@@ -48,17 +48,12 @@ generateOutput = (text, interval) => {
  * 
 */
 prepareGap = (element) => {
-  if (element.length % 2 == 1) {
-    let halfLength = Math.ceil(element.length / 2);
-    let firstHalf = element.substring(0, halfLength);
-    let secondHalf = element.substring(halfLength);
-    return firstHalf + "{1:SA:=" + secondHalf + "}";
-  } else {
-    let halfLength = element.length / 2;
-    let firstHalf = element.substring(0, halfLength);
-    let secondHalf = element.substring(halfLength);
-    return firstHalf + "{1:SA:=" + secondHalf + "}";
-  }
+  let halfLength = element.length % 2 == 1 
+    ? Math.ceil(element.length / 2) 
+    : element.length / 2;
+  let firstHalf = element.substring(0, halfLength);
+  let secondHalf = element.substring(halfLength);
+  return firstHalf + "{1:SA:=" + secondHalf + "}";
 };
 
 

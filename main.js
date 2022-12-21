@@ -8,8 +8,8 @@
  */
 window.onload = () => {
 
-  // call functions
-  // checkToggle();
+  // call function for checking toggle to prepare content
+  checkToggle();
 
   // add version to footer
   document.getElementById("version").innerHTML = version;

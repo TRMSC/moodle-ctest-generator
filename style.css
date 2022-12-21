@@ -1,0 +1,23 @@
+/* Moodle C-Test Generator - Copyright (C) 2022, TRMSC - https://trmsc1.wordpress.com/ */
+/* Licensed under the MIT license - http://www.opensource.org/licenses/mit-license.php */
+
+html {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 11pt;
+    margin: 60px 120px;
+}
+@media (max-width: 1000px) {
+    html {
+        margin: 40px 80px;
+    }
+}
+@media (max-width: 800px) {
+    html {
+        margin: 30px 50px;
+    }
+}
+@media (max-width: 480px) {
+    html {
+        margin: 20px 25px;
+    }
+}

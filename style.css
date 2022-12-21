@@ -21,3 +21,42 @@ html {
         margin: 20px 25px;
     }
 }
+.part {
+    margin-top: 50px;
+}
+.smallpart {
+    margin-top: 20px;
+    border: 1px solid #919191;
+    border-radius: 10px;
+    padding: 5px 20px 10px 20px;
+    background-color: #7b876d2b;
+}
+h3 {
+    text-decoration: underline;
+}
+input[type="button"] {
+    cursor: pointer;
+    border-style:solid;
+    border-width:1px;
+    border-color:#bebebe;
+    background-color:#00a8d5;
+    color:#ffffff;
+    text-align:center;
+    font-size: 12pt;
+}
+input[type="button"]:hover {
+    background-color:#ff6600;
+}
+.bigbutton {
+    font-size: large!important;
+    padding: 5px 8px;
+}
+a {
+    color: #0089ae;
+}
+a:hover {
+    color:#ff6600;
+}
+.lightline {
+    color: #bbb;
+}

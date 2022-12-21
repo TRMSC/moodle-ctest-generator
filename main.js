@@ -51,8 +51,7 @@ prepareGap = (element) => {
   if (element.length % 2 == 1) {
     let halfLength = Math.ceil(element.length / 2);
     let firstHalf = element.substring(0, halfLength);
-    let secondHalf = element.substring(halfLength + 1);
-    secondHalf.length === 0 ? secondHalf = element.substring(halfLength) : null;
+    let secondHalf = element.substring(halfLength);
     return firstHalf + "{1:SA:=" + secondHalf + "}";
   } else {
     let halfLength = element.length / 2;

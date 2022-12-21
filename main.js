@@ -67,8 +67,8 @@ let checkToggle = function() {
  * Check text content of necessary inputs
  * 
  * @function checkContent
- * @param {array} stringArray all necessary inputs
- * @return {boolean} state of text content
+ * @param {array} stringArray All necessary inputs
+ * @return {boolean} check State of text content
  * 
  */
 checkContent = (stringArray) => {
@@ -122,7 +122,7 @@ generateOutput = (text, interval) => {
  * 
  * @function prepareGap
  * @param {string} element Content to prepare for the output
- * @return modified element
+ * @return Modified element
  * 
 */
 prepareGap = (element) => {

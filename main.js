@@ -142,7 +142,7 @@ prepareGap = (element) => {
  * Download quiz
  * 
  * @function downloadQuiz
- * @param {string} input Content to put into thw download file
+ * @param {string} input Content for putting into the download file
  * @param {string} filename Designation for the quiz file
  * 
 */

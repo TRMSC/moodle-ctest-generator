@@ -70,3 +70,116 @@ a:hover {
     font-size: 11pt;
     background-color: #a1b1aa1a;
 }
+#clipboardInfo {
+    padding: 10px;
+    background-color: rgba(0,0,0,.7);
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    position: fixed;
+    top: 105%;
+    left: 30%;
+    right: 30%;
+    -webkit-transition: transform .3s linear;
+    transition: transform .3s linear;
+}
+.clipboardConfirm {
+    -webkit-transform: translateY(-150px); 
+    transform: translateY(-150px); 
+}
+.miniflexbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 43px;
+    height: 22px;
+}
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 6px;
+    bottom: 3.24px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+.switch input:checked + .slider {
+    background-color: #ff6600;
+}
+.switch input:focus + .slider {
+    box-shadow: 0 0 1px #ff6600;
+}
+.switch input:checked + .slider:before {
+    -webkit-transform: translateX(17.5px);
+    -ms-transform: translateX(17.5px);
+    transform: translateX(17.5px);
+}
+.slider.round {
+    border-radius: 34px;
+}  
+.slider.round:before {
+    border-radius: 50%;
+}
+.headerframe {
+    width: fit-content;
+    padding: 10px;
+    background-color: #a1b1aa;
+}
+#prefixContainer {
+    font-size: small;
+    display: flex;
+    align-items: center;
+}
+#prefix {
+    accent-color: #f96400;
+}
+#errorContentManual,
+#errorContentAuto {
+    display: none;
+    width: fit-content;
+    border-radius: 2px;
+    border: 2px solid #795548;
+    cursor: default;
+}
+.errorMsg {
+    background-color: #795548;
+    color: white;
+    font-size: 16px;
+    padding: 0px 5px;
+}
+.close {
+    font-weight: bold;
+    color: #795548;
+    vertical-align: text-bottom;
+    cursor: pointer;
+    font-size: 16px;
+    padding-right: 5px;
+}
+.close:hover {
+    color: #896d63;
+  }
+footer {
+    text-align: right;
+}

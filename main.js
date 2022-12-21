@@ -8,8 +8,9 @@
  */
 window.onload = () => {
 
-  // call function for checking toggle to prepare content
+  // handle toggle and its content
   checkToggle();
+  document.getElementById('autogenerate').addEventListener('click', checkToggle);
 
   // add version to footer
   document.getElementById("version").innerHTML = version;

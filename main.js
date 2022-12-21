@@ -1,4 +1,28 @@
 /**
+ * Prepare page
+ * 
+ * @event
+ * @listens onload
+ * @class window 
+ *
+ */
+window.onload = () => {
+
+  // call functions
+  // checkToggle();
+
+  // add version to footer
+  document.getElementById("version").innerHTML = version;
+
+  // add year to footer
+  let time = new Date();
+  let year = time.getFullYear();
+  document.getElementById("year").innerHTML = year;
+
+};
+
+
+/**
  * Generate output from text
  * 
  * @function generateOutput

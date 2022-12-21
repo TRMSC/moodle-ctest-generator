@@ -27,7 +27,7 @@ generateOutput = (text, interval) => {
     }
 
   }
-  console.log(output);
+
   return output;
 
 };

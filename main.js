@@ -22,6 +22,46 @@ window.onload = () => {
 };
 
 
+
+/**
+ * Check toggle state and prepare content
+ * 
+ * @function checkToggle
+ * 
+ */
+let checkToggle = function() {
+
+  let checkbox = document.getElementById('autogenerate');
+  let toggleinfo = document.getElementById('toggleinfo');
+  let togglesummary = document.getElementById('togglesummary');
+
+  let infoTrue = 'Automatischer Testfragengenerator ist aktiviert';
+  let infoFalse = 'Automatischer Testfragengenerator ist deaktiviert';
+  let summaryTrue = 
+    'Mithilfe des automatischen Testfragengenerators kann der C-Test ' +
+    'direkt erzeugt und heruntergeladen werden.';
+  let summaryFalse = 
+    'Im Gegensatz zum automatischen Generator wird der C-Test im manuellen ' +
+    'Modus nach dem Erstellen per Copy and Paste in Moodle eingefügt.';
+
+  if (checkbox !== null) {
+    if (checkbox.checked) {
+        toggleinfo.innerHTML = infoTrue;
+        togglesummary.innerHTML = summaryTrue;
+        document.getElementById('auto').style.display = 'block';
+        document.getElementById('manual').style.display = 'none';
+    } else {
+        toggleinfo.innerHTML = infoFalse;
+        togglesummary.innerHTML = summaryFalse;
+        document.getElementById('manual').style.display = 'block';
+        document.getElementById('auto').style.display = 'none';
+    }
+  }
+
+};
+
+
+
 /**
  * Generate output from text
  * 

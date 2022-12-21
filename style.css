@@ -60,3 +60,13 @@ a:hover {
 .lightline {
     color: #bbb;
 }
+.generate {
+    width: -webkit-fill-available;
+    width: -moz-available;
+    max-width: 100%;
+    min-width: 100%;
+}
+#ct-gaptext {
+    font-size: 11pt;
+    background-color: #a1b1aa1a;
+}

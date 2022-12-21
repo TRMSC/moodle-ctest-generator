@@ -64,6 +64,25 @@ let checkToggle = function() {
 
 
 /**
+ * Check text content of necessary inputs
+ * 
+ * @function checkContent
+ * @param stringArray
+ * 
+ */
+checkContent = (stringArray) => {
+  let check = true;
+  for (let i = 0; i < stringArray.length; i ++) {
+      if (stringArray[i].length == 0) {
+          check = false;
+      }
+  }
+  return check;
+};
+
+
+
+/**
  * Generate output from text
  * 
  * @function generateOutput

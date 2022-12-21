@@ -73,9 +73,7 @@ let checkToggle = function() {
 checkContent = (stringArray) => {
   let check = true;
   for (let i = 0; i < stringArray.length; i ++) {
-      if (stringArray[i].length == 0) {
-          check = false;
-      }
+      check = stringArray[i].length === 0 ? false : true;
   }
   return check;
 };

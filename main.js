@@ -10,7 +10,7 @@
 generateOutput = (text, interval) => { 
 
   const subindex = text.search(/[.?!]/);
-  let output = text.substring(0, subindex + 1) + " ";
+  let output = text.substring(0, subindex + 1);
   let sentences = text.substring(subindex + 1);
   let words = sentences.match(/[\wÄäÖöÜü'\n]+|[^\s\w']+|\s/g);
   let count = 0;

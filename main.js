@@ -76,6 +76,7 @@ let checkToggle = function() {
  */
 handleAuto = () => {
 
+  // check completeness
   let title = document.getElementById('auto-title');
   let text = document.getElementById('auto-text');
 
@@ -83,6 +84,13 @@ handleAuto = () => {
     document.getElementById('auto-error').style.display = 'block';
     return;
   }
+
+  // close error message
+  closeMsg('auto-error');
+
+  // check and prepare interval
+  let interval = document.getElementById('auto-interval').value;
+  interval = Math.round(interval);
 
 };
 
@@ -96,12 +104,20 @@ handleAuto = () => {
  */
 handleManual = () => {
 
+  // check completeness
   let text = document.getElementById('manual-text');
 
   if ( !checkContent([text]) ) {
     document.getElementById('manual-error').style.display = 'block';
     return;
   }
+
+  // close error message
+  closeMsg('manual-error');
+
+  // check and prepare interval
+  let interval = document.getElementById('manual-interval').value;
+  interval = Math.round(interval);
 
 };
 

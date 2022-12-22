@@ -194,6 +194,7 @@ prepareGap = (element) => {
     : element.length / 2;
   let firstHalf = element.substring(0, halfLength);
   let secondHalf = element.substring(halfLength);
+  
   return firstHalf + "{1:SA:=" + secondHalf + "}";
 
 };

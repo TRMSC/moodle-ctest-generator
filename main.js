@@ -245,7 +245,7 @@ resetContent = (mode) => {
 
   if (mode === 'auto') {
     closeMsg('auto-error');
-    // reset prefix
+    document.getElementById('prefix').checked = 'true';
     document.getElementById('auto-title').value = '';
     document.getElementById('auto-text').value = '';
     document.getElementById('auto-interval').value = '3';

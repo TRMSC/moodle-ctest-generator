@@ -243,15 +243,15 @@ resetContent = (mode) => {
 
   if (mode === 'auto') {
     closeMsg('auto-error');
-    document.getElementById('q-index').value = ''; //prefix
+    // reset prefix
     document.getElementById('auto-title').value = '';
     document.getElementById('auto-text').value = '';
-    // default interval
+    document.getElementById('auto-interval').value = '3';
   } else if (mode === 'manual') {
     closeMsg('manual-error');
     document.getElementById('manual-text').value = '';
     document.getElementById('ct-gaptext').value = '';
-    //default interval
+    document.getElementById('manual-interval').value = '3';
   } 
 
 };

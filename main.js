@@ -188,3 +188,16 @@ downloadQuiz = (input, filename) => {
   document.body.removeChild(a);
 
 };
+
+
+
+/**
+ * Close infobox for errors
+ * 
+ * @function closeMsg
+ * @param item Id for the item to close
+ * 
+ */
+closeMsg = (item) => {
+  document.getElementById(item).style.display = 'none';
+};

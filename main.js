@@ -23,6 +23,8 @@ window.onload = () => {
   document.getElementById('autogenerate').addEventListener('click', checkToggle);
   document.getElementById('generate-auto').addEventListener('click', handleAuto);
   document.getElementById('generate-manual').addEventListener('click', handleManual);
+  document.getElementById('auto-reset').addEventListener('click', function() { resetContent('auto'); });
+  document.getElementById('manual-reset').addEventListener('click', function() { resetContent('manual'); });
   document.getElementById('auto-close').addEventListener('click', function() { closeMsg('auto-error'); });
   document.getElementById('manual-close').addEventListener('click', function() { closeMsg('manual-error'); });
 

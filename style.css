@@ -159,8 +159,7 @@ a:hover {
 #prefix {
     accent-color: #f96400;
 }
-#errorContentManual,
-#errorContentAuto {
+.error-container {
     display: none;
     width: fit-content;
     border-radius: 2px;

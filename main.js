@@ -23,6 +23,7 @@ window.onload = () => {
   document.getElementById('autogenerate').addEventListener('click', checkToggle);
   document.getElementById('generate-auto').addEventListener('click', handleAuto);
   document.getElementById('generate-manual').addEventListener('click', handleManual);
+  document.getElementById('auto-close').addEventListener('click', closeMsg('auto-error'));
 
 };
 

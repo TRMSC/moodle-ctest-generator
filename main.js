@@ -76,7 +76,13 @@ let checkToggle = function() {
  */
 handleAuto = () => {
 
-  console.log('handle progress for auto generating');
+  let title = document.getElementById('auto-title');
+  let text = document.getElementById('auto-text');
+
+  if ( !checkContent([title, text]) ) {
+    document.getElementById('auto-error').style.display = 'block';
+    return;
+  }
 
 };
 
@@ -90,7 +96,12 @@ handleAuto = () => {
  */
 handleManual = () => {
 
-  console.log('handle progress for manual generating');
+  let text = document.getElementById('manual-text');
+
+  if ( !checkContent([text]) ) {
+    document.getElementById('manual-error').style.display = 'block';
+    return;
+  }
 
 };
 
@@ -107,7 +118,7 @@ handleManual = () => {
 checkContent = (stringArray) => {
   let check = true;
   for (let i = 0; i < stringArray.length; i ++) {
-      if (stringArray[i].legth === 0) check = false;
+      if (stringArray[i].value === '') check = false;
   }
   return check;
 };

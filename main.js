@@ -105,7 +105,7 @@ handleManual = () => {
 checkContent = (stringArray) => {
   let check = true;
   for (let i = 0; i < stringArray.length; i ++) {
-      check = stringArray[i].length === 0 ? false : true;
+      if (stringArray[i].legth === 0) check = false;
   }
   return check;
 };

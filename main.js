@@ -230,3 +230,28 @@ downloadQuiz = (input, filename) => {
 closeMsg = (item) => {
   document.getElementById(item).style.display = 'none';
 };
+
+
+
+/**
+ * Reset content for corresponding mode
+ * 
+ * @function resetContent
+ * @param mode Handle auto or manual content
+ */
+resetContent = (mode) => {
+
+  if (mode === 'auto') {
+    closeMsg('auto-error');
+    document.getElementById('q-index').value = ''; //prefix
+    document.getElementById('auto-title').value = '';
+    document.getElementById('auto-text').value = '';
+    // default interval
+  } else if (mode === 'manual') {
+    closeMsg('manual-error');
+    document.getElementById('manual-text').value = '';
+    document.getElementById('ct-gaptext').value = '';
+    //default interval
+  } 
+
+};

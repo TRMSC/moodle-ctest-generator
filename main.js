@@ -23,6 +23,7 @@ window.onload = () => {
   document.getElementById('autogenerate').addEventListener('click', checkToggle);
   document.getElementById('generate-auto').addEventListener('click', handleAuto);
   document.getElementById('generate-manual').addEventListener('click', handleManual);
+  document.getElementById('manual-copy').addEventListener('click', copyClipboard);
   document.getElementById('auto-reset').addEventListener('click', function() { resetContent('auto'); });
   document.getElementById('manual-reset').addEventListener('click', function() { resetContent('manual'); });
   document.getElementById('auto-close').addEventListener('click', function() { closeMsg('auto-error'); });
@@ -241,7 +242,7 @@ copyClipboard = () => {
     content.classList.remove("clipboardConfirm");
     document.getSelection().removeAllRanges();
   }, 1400)
-  
+
 };
 
 

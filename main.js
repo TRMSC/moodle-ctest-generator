@@ -1,3 +1,7 @@
+const prefix = 'ctest-';
+
+
+
 /**
  * Prepare page
  * 
@@ -95,6 +99,16 @@ handleAuto = () => {
   let interval = document.getElementById('auto-interval').value;
   interval = Math.round(interval);
   if (interval < 2) interval = 2;
+
+  // prepare content
+  let content = '::';
+  let prefixCheck = document.getElementById('prefix').checked;
+  if (prefixCheck) content += prefix;
+  content += title.value + '::' + generateOutput(text.value, interval);
+  let filename = prefix + title.value;
+
+  // start download
+  downloadQuiz(content, filename);
 
 };
 

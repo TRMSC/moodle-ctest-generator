@@ -1,3 +1,9 @@
+/**
+ * Define const variables
+ * 
+ * @param {string} prefix Used for the filename and if checked for the question designation
+ *
+ */
 const prefix = 'ctest-';
 
 

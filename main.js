@@ -146,7 +146,7 @@ handleManual = () => {
 
   // create content
   let content = generateOutput(text.value, interval);
-  document.getElementById('ct-gaptext').textContent = content;
+  document.getElementById('ct-gaptext').value = content;
   copyClipboard();
 
 };

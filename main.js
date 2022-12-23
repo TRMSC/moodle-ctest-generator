@@ -94,6 +94,7 @@ handleAuto = () => {
   // check and prepare interval
   let interval = document.getElementById('auto-interval').value;
   interval = Math.round(interval);
+  if (interval < 2) interval = 2;
 
 };
 
@@ -121,6 +122,7 @@ handleManual = () => {
   // check and prepare interval
   let interval = document.getElementById('manual-interval').value;
   interval = Math.round(interval);
+  if (interval < 2) interval = 2;
 
 };
 

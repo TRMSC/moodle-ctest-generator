@@ -144,6 +144,11 @@ handleManual = () => {
   interval = Math.round(interval);
   if (interval < 2) interval = 2;
 
+  // create content
+  let content = generateOutput(text.value, interval);
+  document.getElementById('ct-gaptext').textContent = content;
+  copyClipboard();
+
 };
 
 

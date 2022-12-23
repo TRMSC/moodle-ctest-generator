@@ -224,6 +224,29 @@ downloadQuiz = (input, filename) => {
 
 
 /**
+ * Copy the content of the textarea to the clipboard
+ * 
+ * @function copyClipboard
+ * 
+ */
+copyClipboard = () => {
+
+  document.getElementById('ct-gaptext').select();
+  document.execCommand('copy');
+  let content = document.getElementById("clipboardInfo");
+  setTimeout(function () {
+    content.classList.add("clipboardConfirm");
+  }, 50)
+  setTimeout(function () {
+    content.classList.remove("clipboardConfirm");
+    document.getSelection().removeAllRanges();
+  }, 1400)
+  
+};
+
+
+
+/**
  * Close infobox for errors
  * 
  * @function closeMsg

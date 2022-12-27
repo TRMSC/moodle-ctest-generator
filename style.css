@@ -56,15 +56,11 @@ input[type="number"] {
     font-size: large!important;
     padding: 5px 8px;
 }
-a,
-details {
+a {
     color: #0089ae;
 }
 a:hover {
     color:#ff6600;
-}
-details {
-    font-weight: bold;
 }
 .lightline {
     color: #bbb;
@@ -102,6 +98,8 @@ details {
     gap: 10px;
 }
 summary {
+    color: #0089ae;
+    font-weight: bold;
     cursor: pointer;
     width: fit-content;
 }

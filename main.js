@@ -36,6 +36,7 @@ window.onload = () => {
   document.getElementById("year").innerHTML = year;
 
   // add event listeners
+  share.addEventListener('click', sharePage);
   document.getElementById('autogenerate').addEventListener('click', checkToggle);
   document.getElementById('generate-auto').addEventListener('click', handleAuto);
   document.getElementById('generate-manual').addEventListener('click', handleManual);
@@ -45,18 +46,7 @@ window.onload = () => {
   document.getElementById('auto-close').addEventListener('click', function() { closeMsg('auto-error'); });
   document.getElementById('manual-close').addEventListener('click', function() { closeMsg('manual-error'); });
 
-  // add event listener for sharing
-  share.addEventListener('click', async () => {
-    try {
-      await navigator.share(shareData);
-      console.log('Shared successfully');
-    } catch (err) {
-      console.log(`Error: ${err}`);
-    }
-  });
-
 };
-
 
 
 
@@ -96,6 +86,26 @@ let checkToggle = function() {
   }
 
 };
+
+
+
+/**
+ * Share page by using the share api
+ * 
+ * @function sharePage
+ * 
+ */
+sharePage = async () => {
+
+  try {
+    await navigator.share(shareData);
+    console.log('Shared successfully');
+  } catch (err) {
+    console.log(`Error: ${err}`);
+  }
+  
+};
+
 
 
 /**

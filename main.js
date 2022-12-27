@@ -2,6 +2,7 @@
  * Define const variables
  * 
  * @param {string} prefix Used for the filename and if checked for the question designation
+ * @param {array} shareData Site information for share method
  *
  */
 const prefix = 'ctest-';
@@ -48,9 +49,9 @@ window.onload = () => {
   share.addEventListener('click', async () => {
     try {
       await navigator.share(shareData);
-      resultPara.textContent = 'Shared successfully';
+      console.log('Shared successfully');
     } catch (err) {
-      resultPara.textContent = `Error: ${err}`;
+      console.log(`Error: ${err}`);
     }
   });
 

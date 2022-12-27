@@ -97,6 +97,9 @@ a:hover {
     align-items: center;
     gap: 10px;
 }
+details[open] {
+    margin-bottom: 25px;
+}
 summary {
     color: #0089ae;
     font-weight: bold;

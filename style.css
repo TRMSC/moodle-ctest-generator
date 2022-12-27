@@ -97,6 +97,14 @@ a:hover {
     align-items: center;
     gap: 10px;
 }
+summary {
+    cursor: pointer;
+    width: fit-content;
+}
+summary::marker,
+summary:hover {
+    color: #ff6600!important;
+}
 .switch {
     position: relative;
     display: inline-block;

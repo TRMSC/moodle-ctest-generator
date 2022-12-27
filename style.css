@@ -56,11 +56,15 @@ input[type="number"] {
     font-size: large!important;
     padding: 5px 8px;
 }
-a {
+a,
+details {
     color: #0089ae;
 }
 a:hover {
     color:#ff6600;
+}
+details {
+    font-weight: bold;
 }
 .lightline {
     color: #bbb;

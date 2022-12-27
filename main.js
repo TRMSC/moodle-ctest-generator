@@ -5,6 +5,11 @@
  *
  */
 const prefix = 'ctest-';
+const shareData = {
+  title: 'Moodle C-Test Generator | TRMSC',
+  text: 'C-Test Generator für Moodle | TRMSC',
+  url: window.location
+}
 
 
 
@@ -39,7 +44,18 @@ window.onload = () => {
   document.getElementById('auto-close').addEventListener('click', function() { closeMsg('auto-error'); });
   document.getElementById('manual-close').addEventListener('click', function() { closeMsg('manual-error'); });
 
+  // add event listener for sharing
+  share.addEventListener('click', async () => {
+    try {
+      await navigator.share(shareData);
+      resultPara.textContent = 'Shared successfully';
+    } catch (err) {
+      resultPara.textContent = `Error: ${err}`;
+    }
+  });
+
 };
+
 
 
 

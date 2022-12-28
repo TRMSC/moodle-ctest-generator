@@ -62,6 +62,12 @@ a {
 a:hover {
     color:#ff6600;
 }
+ol {
+    list-style-type: square;
+}
+li::marker {
+    color: #636a67;
+}
 .lightline {
     color: #bbb;
 }

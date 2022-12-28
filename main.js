@@ -136,6 +136,34 @@ closeDetails = (current) => {
     }
   }
 
+  scrollPage(current);
+
+};
+
+
+
+/**
+ * Scroll to a specific element
+ * 
+ * @function scrollPage
+ * @param element Selector of the element for scrolling to
+ * @alternative window.scrollTo(0, current.offsetTop - 70);
+ * 
+ */
+scrollPage = (element) => {
+
+  let targetY = element.offsetTop - 70;
+  let currentY = window.pageYOffset;
+  let step = (targetY - currentY) / 20;
+
+  let intervalId = setInterval(function() {
+    currentY += step;
+    window.scrollTo(0, currentY);
+    if (currentY >= targetY) {
+      clearInterval(intervalId);
+    }
+  }, 10);
+
 };
 
 
@@ -227,7 +255,7 @@ checkContent = (stringArray) => {
       if (stringArray[i].value === '') check = false;
   }
   return check;
-  
+
 };
 
 

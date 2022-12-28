@@ -46,6 +46,14 @@ window.onload = () => {
   document.getElementById('auto-close').addEventListener('click', function() { closeMsg('auto-error'); });
   document.getElementById('manual-close').addEventListener('click', function() { closeMsg('manual-error'); });
 
+  // event listener for opened details
+  let details = document.querySelectorAll("details");
+  for (var i = 0; i < details.length; i++) {
+    details[i].addEventListener("click", function() {
+      closeDetails(this);
+    });
+  }
+
 };
 
 
@@ -104,6 +112,26 @@ sharePage = async () => {
     console.log(`Error: ${err}`);
   }
   
+};
+
+
+/**
+ * Close all other details part if another will be opened
+ * 
+ * @function closeDetails
+ * @param current Details part that was opened finally
+ * 
+ */
+closeDetails = (current) => {
+
+  let details = document.querySelectorAll("details");
+
+  for (let i = 0; i < details.length; i++) {
+    if (details[i] != current) {
+      details[i].open = false;
+    }
+  }
+
 };
 
 

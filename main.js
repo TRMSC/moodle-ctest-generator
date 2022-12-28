@@ -124,9 +124,12 @@ sharePage = async () => {
  * 
  * @function closeDetails
  * @param current Details part that was opened finally
+ * @return Leave function whenn current details part is opened
  * 
  */
 closeDetails = (current) => {
+
+  if (current.hasAttribute('open')) return;
 
   let details = document.querySelectorAll("details");
 

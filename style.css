@@ -72,6 +72,9 @@ li::marker {
 .lightline {
     color: #bbb;
 }
+.nodeco {
+    text-decoration: none;
+}
 .generate {
     width: -webkit-fill-available;
     width: -moz-available;

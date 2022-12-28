@@ -320,6 +320,35 @@ prepareGap = (element) => {
 };
 
 
+/**
+ * Round letters up or down
+ * 
+ * @function roundLetters
+ * @param {number} x Number of letters for rounding
+ * @return Rounded letters
+ * 
+ * @todo Used for later, there are a few things to do:
+ * Add a select field within the html part
+ * Implement call in the prepareGap(element) function
+ * Lead auto or manual generating mode through the functions
+ * 
+*/
+roundLetters = (x) => {
+
+  const method = round.value;
+
+  switch (method) {
+    case "floor":
+      return Math.floor(x);
+    case "ceil":
+      return Math.ceil(x);
+    case "random":
+      return Math.random() < 0.5 ? Math.floor(x) : Math.ceil(x);
+  }
+
+};
+
+
 
 /**
  * Download quiz

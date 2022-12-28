@@ -306,11 +306,14 @@ generateOutput = (text, interval) => {
  * @param {string} element Content to prepare for the output
  * @return Modified element
  * 
+ * @hint For words with an odd number of letters, the gap gets larger by using Math.floor()
+ * @hint Maybe an option to choose the Math.ceil() method was useful
+ * 
 */
 prepareGap = (element) => {
 
   let halfLength = element.length % 2 == 1 
-    ? Math.ceil(element.length / 2) 
+    ? Math.floor(element.length / 2) 
     : element.length / 2;
   let firstHalf = element.substring(0, halfLength);
   let secondHalf = element.substring(halfLength);

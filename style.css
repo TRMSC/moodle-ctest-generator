@@ -64,6 +64,7 @@ a:hover {
 }
 ol {
     list-style-type: square;
+    font-style: italic;
 }
 li::marker {
     color: #636a67;

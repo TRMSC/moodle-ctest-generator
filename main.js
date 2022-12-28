@@ -38,13 +38,13 @@ window.onload = () => {
   // add event listeners
   share.addEventListener('click', sharePage);
   toggle.addEventListener('click', checkToggle);
-  document.getElementById('generate-auto').addEventListener('click', handleAuto);
-  document.getElementById('generate-manual').addEventListener('click', handleManual);
-  document.getElementById('manual-copy').addEventListener('click', copyClipboard);
-  document.getElementById('auto-reset').addEventListener('click', function() { resetContent('auto'); });
-  document.getElementById('manual-reset').addEventListener('click', function() { resetContent('manual'); });
-  document.getElementById('auto-close').addEventListener('click', function() { closeMsg('auto-error'); });
-  document.getElementById('manual-close').addEventListener('click', function() { closeMsg('manual-error'); });
+  document.getElementById('generateAuto').addEventListener('click', handleAuto); //
+  document.getElementById('generateManual').addEventListener('click', handleManual); //
+  document.getElementById('manualCopy').addEventListener('click', copyClipboard); //
+  document.getElementById('autoReset').addEventListener('click', function() { resetContent('auto'); }); //
+  document.getElementById('manualReset').addEventListener('click', function() { resetContent('manual'); }); //
+  document.getElementById('autoClose').addEventListener('click', function() { closeMsg('auto-error'); }); //
+  document.getElementById('manualClose').addEventListener('click', function() { closeMsg('manual-error'); });
 
   // event listener for opened details
   let details = document.querySelectorAll("details");

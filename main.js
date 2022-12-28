@@ -38,13 +38,13 @@ window.onload = () => {
   // add event listeners
   share.addEventListener('click', sharePage);
   toggle.addEventListener('click', checkToggle);
-  document.getElementById('generateAuto').addEventListener('click', handleAuto); //
-  document.getElementById('generateManual').addEventListener('click', handleManual); //
-  document.getElementById('manualCopy').addEventListener('click', copyClipboard); //
-  document.getElementById('autoReset').addEventListener('click', function() { resetContent('auto'); }); //
-  document.getElementById('manualReset').addEventListener('click', function() { resetContent('manual'); }); //
-  document.getElementById('autoClose').addEventListener('click', function() { closeMsg('auto-error'); }); //
-  document.getElementById('manualClose').addEventListener('click', function() { closeMsg('manual-error'); });
+  generateAuto.addEventListener('click', handleAuto);
+  generateManual.addEventListener('click', handleManual);
+  manualCopy.addEventListener('click', copyClipboard);
+  autoReset.addEventListener('click', function() { resetContent('auto'); });
+  manualReset.addEventListener('click', function() { resetContent('manual'); });
+  autoClose.addEventListener('click', function() { closeMsg('auto-error'); });
+  manualClose.addEventListener('click', function() { closeMsg('manual-error'); });
 
   // event listener for opened details
   let details = document.querySelectorAll("details");

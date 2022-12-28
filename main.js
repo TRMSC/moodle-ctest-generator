@@ -24,34 +24,37 @@ const shareData = {
  */
 window.onload = () => {
 
-  // handle toggle and its content
+  // Handle toggle and its content
   checkToggle();
 
-  // add version to footer
+  // Add version to footer
   document.getElementById("version").innerHTML = version;
 
-  // add year to footer
+  // Add year to footer
   let time = new Date();
   let year = time.getFullYear();
   document.getElementById("year").innerHTML = year;
 
-  // add event listeners
-  share.addEventListener('click', sharePage);
-  toggle.addEventListener('click', checkToggle);
-  generateAuto.addEventListener('click', handleAuto);
-  generateManual.addEventListener('click', handleManual);
-  manualCopy.addEventListener('click', copyClipboard);
-  autoReset.addEventListener('click', function() { resetContent('auto'); });
-  manualReset.addEventListener('click', function() { resetContent('manual'); });
-  autoClose.addEventListener('click', function() { closeMsg('auto-error'); });
-  manualClose.addEventListener('click', function() { closeMsg('manual-error'); });
+  // Build function for adding event listeners
+  const addClickEvent = function(element, handler) {
+    element.addEventListener('click', handler);
+  }
+  
+  // Add general event listeners
+  addClickEvent(share, sharePage);
+  addClickEvent(toggle, checkToggle);
+  addClickEvent(generateAuto, handleAuto);
+  addClickEvent(generateManual, handleManual);
+  addClickEvent(manualCopy, copyClipboard);
+  addClickEvent(autoReset, function() { resetContent('auto'); });
+  addClickEvent(manualReset, function() { resetContent('manual'); });
+  addClickEvent(autoClose, function() { closeMsg('auto-error'); });
+  addClickEvent(manualClose, function() { closeMsg('manual-error'); });
 
-  // event listener for opened details
+  // Add event listeners for opened details
   let details = document.querySelectorAll("details");
   for (var i = 0; i < details.length; i++) {
-    details[i].addEventListener("click", function() {
-      closeDetails(this);
-    });
+    addClickEvent(details[i], function() { closeDetails(this); });
   }
 
 };
@@ -66,10 +69,10 @@ window.onload = () => {
  */
 let checkToggle = function() {
 
+  // Define variables
   let checkbox = document.getElementById('toggle');
   let toggleinfo = document.getElementById('toggleinfo');
   let togglesummary = document.getElementById('togglesummary');
-
   let infoTrue = 'Automatischer Testfragengenerator ist aktiviert';
   let infoFalse = 'Automatischer Testfragengenerator ist deaktiviert';
   let summaryTrue = 
@@ -79,6 +82,7 @@ let checkToggle = function() {
     'Im Gegensatz zum automatischen Generator wird der C-Test im manuellen ' +
     'Modus nach dem Erstellen per Copy and Paste in Moodle eingefügt.';
 
+  // Prepare content for toggle state
   if (checkbox !== null) {
     if (checkbox.checked) {
         toggleinfo.innerHTML = infoTrue;
@@ -144,7 +148,7 @@ closeDetails = (current) => {
  */
 handleAuto = () => {
 
-  // check completeness
+  // Check completeness
   let title = document.getElementById('auto-title');
   let text = document.getElementById('auto-text');
 
@@ -153,22 +157,22 @@ handleAuto = () => {
     return;
   }
 
-  // close error message
+  // Close error message
   closeMsg('auto-error');
 
-  // check and prepare interval
+  // Check and prepare interval
   let interval = document.getElementById('auto-interval').value;
   interval = Math.round(interval);
   if (interval < 2) interval = 2;
 
-  // prepare content
+  // Prepare content
   let content = '::';
   let prefixCheck = document.getElementById('prefix').checked;
   if (prefixCheck) content += prefix;
   content += title.value + '::' + generateOutput(text.value, interval);
   let filename = prefix + title.value;
 
-  // start download
+  // Start download
   downloadQuiz(content, filename);
 
 };
@@ -183,7 +187,7 @@ handleAuto = () => {
  */
 handleManual = () => {
 
-  // check completeness
+  // Check completeness
   let text = document.getElementById('manual-text');
 
   if ( !checkContent([text]) ) {
@@ -191,15 +195,15 @@ handleManual = () => {
     return;
   }
 
-  // close error message
+  // Close error message
   closeMsg('manual-error');
 
-  // check and prepare interval
+  // Check and prepare interval
   let interval = document.getElementById('manual-interval').value;
   interval = Math.round(interval);
   if (interval < 2) interval = 2;
 
-  // create content
+  // Create content
   let content = generateOutput(text.value, interval);
   document.getElementById('ct-gaptext').value = content;
   copyClipboard();
@@ -217,11 +221,13 @@ handleManual = () => {
  * 
  */
 checkContent = (stringArray) => {
+
   let check = true;
   for (let i = 0; i < stringArray.length; i ++) {
       if (stringArray[i].value === '') check = false;
   }
   return check;
+  
 };
 
 

@@ -37,7 +37,7 @@ window.onload = () => {
 
   // add event listeners
   share.addEventListener('click', sharePage);
-  document.getElementById('toggle').addEventListener('click', checkToggle);
+  toggle.addEventListener('click', checkToggle);
   document.getElementById('generate-auto').addEventListener('click', handleAuto);
   document.getElementById('generate-manual').addEventListener('click', handleManual);
   document.getElementById('manual-copy').addEventListener('click', copyClipboard);

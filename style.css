@@ -66,6 +66,9 @@ ol {
     list-style-type: square;
     font-style: italic;
 }
+li {
+    padding-bottom: 5px;
+}
 li::marker {
     color: #636a67;
 }

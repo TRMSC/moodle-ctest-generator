@@ -77,6 +77,12 @@ li::marker {
 .nodeco {
     text-decoration: none;
 }
+.marked {
+    background-color: #56645e4a;
+    padding: 0px 2px 1px 2px;
+    border-radius: 2px;
+    border: 1px solid #56645eb5;
+}
 .generate {
     width: -webkit-fill-available;
     width: -moz-available;

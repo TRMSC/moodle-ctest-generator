@@ -127,7 +127,7 @@ sharePage = async () => {
  * @return Leave function whenn current details part is opened
  * 
  */
-closeDetails = (current) => {
+closeDetails = async (current) => {
 
   if (current.hasAttribute('open')) return;
 
@@ -139,6 +139,7 @@ closeDetails = (current) => {
     }
   }
 
+  await new Promise(resolve => setTimeout(resolve, 0));
   scrollPage(current);
 
 };

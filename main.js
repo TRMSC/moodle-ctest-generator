@@ -104,7 +104,9 @@ let checkToggle = function() {
 /**
  * Share page by using the share api
  * 
+ * @async
  * @function sharePage
+ * @throws {error} When the share api isn't available or the share fails
  * 
  */
 sharePage = async () => {
@@ -122,9 +124,10 @@ sharePage = async () => {
 /**
  * Close all other details part if another will be opened
  * 
+ * @async
  * @function closeDetails
  * @param current Details part that was opened finally
- * @return Leave function whenn current details part is opened
+ * @returns {promise} Leave function whenn current details part is opened
  * 
  */
 closeDetails = async (current) => {
@@ -249,7 +252,7 @@ handleManual = () => {
  * 
  * @function checkContent
  * @param {array} stringArray All necessary inputs
- * @return {boolean} check State of text content
+ * @returns {boolean} Check State of text content
  * 
  */
 checkContent = (stringArray) => {
@@ -270,7 +273,7 @@ checkContent = (stringArray) => {
  * @function generateOutput
  * @param {string} text Content to prepare for the output
  * @param {number} count Spacing of the seperated words
- * @return output Modified text
+ * @returns output Modified text
  * 
 */
 generateOutput = (text, interval) => { 
@@ -305,7 +308,7 @@ generateOutput = (text, interval) => {
  * 
  * @function prepareGap
  * @param {string} element Content to prepare for the output
- * @return Modified element
+ * @returns Modified element
  * 
  * @hint For words with an odd number of letters, the gap gets larger by using Math.floor()
  * @hint Maybe an option to choose the Math.ceil() method was useful
@@ -329,7 +332,7 @@ prepareGap = (element) => {
  * 
  * @function roundLetters
  * @param {number} x Number of letters for rounding
- * @return Rounded letters
+ * @returns Rounded letters
  * 
  * @todo Used for later, there are a few things to do:
  * Add a select field within the html part

@@ -216,7 +216,7 @@ handleAuto = () => {
           <text>${questionTitle}</text>
         </name>
         <questiontext format="html">
-          <text><![CDATA[<p dir="ltr" style="text-align: left;">${questionText}]]></text>
+          <text><![CDATA[<p>${questionText}</p>]]></text>
         </questiontext>
         <generalfeedback format="html">
           <text></text>

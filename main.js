@@ -142,7 +142,7 @@ closeDetails = async (current) => {
     }
   }
 
-  await new Promise(resolve => setTimeout(resolve, 0));
+  await new Promise(resolve => setTimeout(resolve, 100));
   scrollPage(current);
 
 };
@@ -166,12 +166,13 @@ scrollPage = (element) => {
   let intervalId = setInterval(function() {
     currentY += step;
     window.scrollTo(0, currentY);
-    if (currentY >= targetY) {
+    if (step > 0 && currentY >= targetY || step < 0 && currentY <= targetY) {
       clearInterval(intervalId);
     }
   }, 10);
-
+  
 };
+
 
 
 

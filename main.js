@@ -203,13 +203,32 @@ handleAuto = () => {
   if (interval < 2) interval = 2;
 
   // Prepare content
-  let content = '::';
   let prefixCheck = document.getElementById('prefix').checked;
-  if (prefixCheck) content += prefix;
-  content += title.value + '::' + generateOutput(text.value, interval);
-  let filename = prefix + title.value;
+  let questionTitle = prefixCheck ? prefix + title.value : title.value;
+  let questionText = generateOutput(text.value, interval);
+  questionText = questionText.replace(/\n/g, '</p><p>');
+
+  let content = 
+    `<?xml version="1.0" encoding="UTF-8"?>
+    <quiz>
+      <question type="cloze">
+        <name>
+          <text>${questionTitle}</text>
+        </name>
+        <questiontext format="html">
+          <text><![CDATA[<p dir="ltr" style="text-align: left;">${questionText}]]></text>
+        </questiontext>
+        <generalfeedback format="html">
+          <text></text>
+        </generalfeedback>
+        <penalty>0.3333333</penalty>
+        <hidden>0</hidden>
+        <idnumber></idnumber>
+      </question>
+    </quiz>`;
 
   // Start download
+  let filename = prefix + title.value;
   downloadQuiz(content, filename);
 
 };

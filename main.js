@@ -154,15 +154,16 @@ closeDetails = async (current) => {
  * 
  * @function scrollPage
  * @param element Selector of the element for scrolling to
- * @alternative window.scrollTo(0, current.offsetTop - 70);
  * 
  */
 scrollPage = (element) => {
 
+  // Prepare variables
   let targetY = element.offsetTop - 70;
   let currentY = window.pageYOffset;
   let step = (targetY - currentY) / 20;
 
+  // Proceed scrolling
   let intervalId = setInterval(function() {
     currentY += step;
     window.scrollTo(0, currentY);
@@ -170,7 +171,7 @@ scrollPage = (element) => {
       clearInterval(intervalId);
     }
   }, 10);
-  
+
 };
 
 

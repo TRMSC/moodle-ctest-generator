@@ -449,12 +449,12 @@ resetContent = (mode) => {
     document.getElementById('prefix').checked = 'true';
     document.getElementById('auto-title').value = '';
     document.getElementById('auto-text').value = '';
-    document.getElementById('auto-interval').value = '3';
+    document.getElementById('auto-interval').value = '2';
   } else if (mode === 'manual') {
     closeMsg('manual-error');
     document.getElementById('manual-text').value = '';
     document.getElementById('ct-gaptext').value = '';
-    document.getElementById('manual-interval').value = '3';
+    document.getElementById('manual-interval').value = '2';
   } 
 
 };

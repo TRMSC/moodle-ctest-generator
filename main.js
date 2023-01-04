@@ -188,6 +188,7 @@ handleAuto = () => {
   // Check completeness
   let title = document.getElementById('auto-title');
   let text = document.getElementById('auto-text');
+  let sub = document.getElementById('auto-sub');
 
   if ( !checkContent([title, text]) ) {
     document.getElementById('auto-error').style.display = 'block';
@@ -205,8 +206,8 @@ handleAuto = () => {
   // Prepare content
   let prefixCheck = document.getElementById('prefix').checked;
   let questionTitle = prefixCheck ? prefix + title.value : title.value;
-  let questionText = generateOutput(text.value, interval);
-  questionText = questionText.replace(/\n/g, '</p><p>');
+  let questionText = generateOutput(text.value, interval).replace(/\n/g, '</p><p>');
+  let questionSub = sub.value.length > 0 ? '</p><p><sub>' + sub.value + '</sub>' : '';
 
   let content = 
     `<?xml version="1.0" encoding="UTF-8"?>
@@ -216,7 +217,7 @@ handleAuto = () => {
           <text>${questionTitle}</text>
         </name>
         <questiontext format="html">
-          <text><![CDATA[<p>${questionText}</p>]]></text>
+          <text><![CDATA[<p>${questionText}${questionSub}</p>]]></text>
         </questiontext>
         <generalfeedback format="html">
           <text></text>
@@ -228,8 +229,7 @@ handleAuto = () => {
     </quiz>`;
 
   // Start download
-  let filename = prefix + title.value;
-  downloadQuiz(content, filename);
+  downloadQuiz(content, prefix + title.value);
 
 };
 

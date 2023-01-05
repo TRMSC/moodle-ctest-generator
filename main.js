@@ -121,6 +121,7 @@ sharePage = async () => {
     console.log('Shared successfully');
   } catch (err) {
     console.log(`Error: ${err}`);
+    alert('Diese Funktion wird in diesem Browser aktuell noch nicht unterstützt.');
   }
   
 };

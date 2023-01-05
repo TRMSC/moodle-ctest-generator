@@ -116,12 +116,18 @@ let checkToggle = function() {
  */
 sharePage = async () => {
 
-  try {
-    await navigator.share(shareData);
-    console.log('Shared successfully');
-  } catch (err) {
-    console.log(`Error: ${err}`);
-    alert('Diese Funktion wird in diesem Browser aktuell noch nicht unterstützt.');
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+      console.log('Shared successfully');
+    } catch (err) {
+      console.log(`Error: ${err}`);
+    }
+  } else {
+      alert(
+        'Diese Funktion wird in diesem Browser aktuell noch nicht unterstützt.\n' +
+        'Es wird derzeit an einer alternativen Variante gearbeitet.'
+      );    
   }
   
 };

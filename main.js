@@ -41,7 +41,6 @@ window.onload = () => {
   }
   
   // Add general event listeners
-  addClickEvent(share, sharePage);
   addClickEvent(toggle, checkToggle);
   addClickEvent(generateAuto, handleAuto);
   addClickEvent(generateManual, handleManual);
@@ -52,9 +51,15 @@ window.onload = () => {
   addClickEvent(manualClose, function() { closeMsg('manual-error'); });
 
   // Add event listeners for opened details
-  let details = document.querySelectorAll("details");
-  for (var i = 0; i < details.length; i++) {
+  const details = document.querySelectorAll("details");
+  for (let i = 0; i < details.length; i++) {
     addClickEvent(details[i], function() { closeDetails(this); });
+  }
+
+  // Add event listeners for sharing buttons
+  const shareElements = document.getElementsByClassName('share');
+  for (let i = 0; i < shareElements.length; i++) {
+    addClickEvent(shareElements[i], sharePage);
   }
 
 };

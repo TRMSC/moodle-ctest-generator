@@ -222,6 +222,10 @@ summary:hover {
 .close:hover {
     color: #896d63;
 }
+#src p {
+    overflow: hidden;
+    white-space: nowrap;
+}
 footer {
     text-align: right;
 }

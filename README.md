@@ -10,6 +10,6 @@ The C-Test Generator is browser based, free, opensource and licensed unter the M
 
 ## How to
 
-Start creating C-Tests for Moodle on the GitHub-Page of this repository where you can also find information about the concept of the testing concept:
+Start creating C-Tests for Moodle on the GitHub-Page of this repository where you also can find information about the testing concept:
 
 __[:arrow_right: Open C-Test Generator for Moodle](https://trmsc.github.io/moodle-ctest-generator/)__

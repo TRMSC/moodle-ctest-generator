@@ -137,16 +137,22 @@ sharePage = async () => {
  */
 closeDetails = async (current) => {
 
-  if (current.hasAttribute('open')) return;
+  // Jump to divs start position if details was closed by user
+  let info = document.getElementById('info');
+  if (current.hasAttribute('open')) {
+    scrollPage(info);
+    return;
+  }
 
+  // Close all other details elements except current
   let details = document.querySelectorAll("details");
-
   for (let i = 0; i < details.length; i++) {
     if (details[i] != current) {
       details[i].open = false;
     }
   }
 
+  // Scroll page when promise is resolved
   await new Promise(resolve => setTimeout(resolve, 100));
   scrollPage(current);
 

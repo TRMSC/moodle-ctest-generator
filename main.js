@@ -401,7 +401,7 @@ downloadQuiz = (input, filename) => {
 
   let blob = new Blob([input], {type:'text/plain'});
   let a = document.createElement("a");
-  a.download = filename + '.txt';
+  a.download = filename + '.xml';
   a.href = window.URL.createObjectURL(blob);
   document.body.appendChild(a);
   a.click();

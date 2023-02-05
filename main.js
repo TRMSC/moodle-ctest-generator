@@ -1,478 +1,85 @@
-/**
- * Define const variables
- * 
- * @param {string} prefix Used for the filename and if checked for the question designation
- * @param {array} shareData Site information for share method
- *
- */
-const prefix = 'ctest-';
-const shareData = {
-  title: 'Moodle C-Test Generator | TRMSC',
-  text: 'C-Test Generator für Moodle | TRMSC',
-  url: window.location
-}
+(() => {  
+  const currentUrl = window.location.href;
+  const courseId = currentUrl.split('id=')[1];
+  const pointsUrl = `/moodle/grade/report/user/index.php?id=${courseId}`;
+
+  fetch(pointsUrl)
+    .then(response => response.text())
+    .then(html => {
+      const parser = new DOMParser();
+      const htmlDoc = parser.parseFromString(html, 'text/html');
+      const grades = htmlDoc.querySelectorAll('.column-grade');
+      const percentage = htmlDoc.querySelectorAll('.column-percentage');
+      const values = getValues(grades, percentage);
+
+      const points = Math.round(values.points);
+      const amount = values.amount;
+      const percentAll = values.percent;
+      const percent = Math.round(values.percent / amount);
+      let level = Math.floor(1 + Math.log2(percentAll / 100 + 1) * 0.7);
+      const potency = points / grades.length;
+      const maxCoins = 8;
+      let coins = 0;
+      if (amount > 0) {
+        for (let i = 0; i < amount; i++) {
+          coins += Math.round(Math.abs(Math.sin(i)) * maxCoins + 1.2 * potency / 100 * maxCoins);
+        }
+      }
+      
+      implementElements(level, amount, percent, points, coins);
+
+    });
+})();
 
 
-
-/**
- * Prepare page
- * 
- * @event
- * @listens onload
- * @class window 
- *
- */
-window.onload = () => {
-
-  // Handle toggle and its content
-  checkToggle();
-
-  // Add version to footer
-  document.getElementById("version").innerHTML = version;
-
-  // Add year to footer
-  let time = new Date();
-  let year = time.getFullYear();
-  document.getElementById("year").innerHTML = year;
-
-  // Build function for adding event listeners
-  const addClickEvent = function(element, handler) {
-    element.addEventListener('click', handler);
-  }
-  
-  // Add general event listeners
-  addClickEvent(toggle, checkToggle);
-  addClickEvent(generateAuto, handleAuto);
-  addClickEvent(generateManual, handleManual);
-  addClickEvent(manualCopy, copyClipboard);
-  addClickEvent(autoReset, function() { resetContent('auto'); });
-  addClickEvent(manualReset, function() { resetContent('manual'); });
-  addClickEvent(autoClose, function() { closeMsg('auto-error'); });
-  addClickEvent(manualClose, function() { closeMsg('manual-error'); });
-
-  // Add event listeners for opened details
-  const details = document.querySelectorAll("details");
-  for (let i = 0; i < details.length; i++) {
-    addClickEvent(details[i], function() { closeDetails(this); });
-  }
-
-  // Add event listeners for sharing buttons
-  const shareElements = document.getElementsByClassName('share');
-  for (let i = 0; i < shareElements.length; i++) {
-    addClickEvent(shareElements[i], sharePage);
-  }
-
-};
-
-
-
-/**
- * Check toggle state and prepare content
- * 
- * @function checkToggle
- * 
- */
-let checkToggle = function() {
-
-  // Define variables
-  let checkbox = document.getElementById('toggle');
-  let toggleinfo = document.getElementById('toggleinfo');
-  let togglesummary = document.getElementById('togglesummary');
-  let infoTrue = 'Automatischer Testfragengenerator ist aktiviert';
-  let infoFalse = 'Automatischer Testfragengenerator ist deaktiviert';
-  let summaryTrue = 
-    'Mithilfe des automatischen Testfragengenerators kann der C-Test ' +
-    'direkt erzeugt und heruntergeladen werden.';
-  let summaryFalse = 
-    'Im Gegensatz zum automatischen Generator wird der C-Test im manuellen ' +
-    'Modus nach dem Erstellen per Copy and Paste in Moodle eingefügt.';
-
-  // Prepare content for toggle state
-  if (checkbox !== null) {
-    if (checkbox.checked) {
-        toggleinfo.innerHTML = infoTrue;
-        togglesummary.innerHTML = summaryTrue;
-        document.getElementById('auto').style.display = 'block';
-        document.getElementById('manual').style.display = 'none';
-    } else {
-        toggleinfo.innerHTML = infoFalse;
-        togglesummary.innerHTML = summaryFalse;
-        document.getElementById('manual').style.display = 'block';
-        document.getElementById('auto').style.display = 'none';
+getValues = (grades, percentage) => {
+  let points = 0;
+  let percent = 0;
+  let amount = 0;
+  for (let i = 0; i < grades.length; i++) {
+    const gradeValue = parseFloat(grades[i].textContent.replace(',', '.'));
+    const percentageValue = parseFloat(percentage[i].textContent.replace(',', '.').replace(' %', ''));
+    if (!isNaN(gradeValue) && gradeValue >= 0) {
+      points += gradeValue;
+      percent += percentageValue;
+      amount += 1;
     }
   }
-
+  return {points, percent, amount};
 };
 
 
+implementElements = (level, amount, percent, points, coins) => {
+  const elements = [
+    { text: `<i class="fa fa-check"></i> ${amount}`, class: "col" },
+    { text: `<i class="fa fa-trophy"></i> ${level}`, class: "col" },
+    { text: `<i class="fa fa-pie-chart"></i> ${percent}%`, class: "col" },
+    { text: `<i class="fa fa-th"></i> ${points}`, class: "col" },
+    { text: `<i class="fa fa-database"></i> ${coins}`, class: "col" }
+  ];
 
-/**
- * Share page by using the share api
- * 
- * @async
- * @function sharePage
- * @throws {error} When the share api isn't available or the share fails
- * 
- */
-sharePage = async () => {
+  const row = document.createElement("div");
+  row.classList.add("row");
+  row.style.marginBottom = "15px";
+  row.style.fontSize = "x-large";
+  row.style.fontFamily = "fantasy";
+  row.style.color = "#2b3035";
+  row.style.backgroundImage = "linear-gradient(45deg, #11510080, #002eff80)";
+  row.style.textShadow = "4px 4px 7px var(--gray)";
+  row.style.borderRadius = "5px";
 
-  if (navigator.share) {
-    try {
-      await navigator.share(shareData);
-      console.log('Shared successfully');
-    } catch (err) {
-      console.log(`Error: ${err}`);
-    }
-  } else {
-      alert(
-        'Diese Funktion wird in diesem Browser aktuell noch nicht unterstützt.\n' +
-        'Es wird derzeit an einer alternativen Variante gearbeitet.'
-      );    
-  }
-  
-};
+  for (const element of elements) {
+    const col = document.createElement("div");
+    col.classList.add(element.class);
+    col.innerHTML = element.text;
+    col.style.textAlign = "center";
 
-
-/**
- * Close all other details part if another will be opened
- * 
- * @async
- * @function closeDetails
- * @param current Details part that was opened finally
- * @returns {promise} Leave function whenn current details part is opened
- * 
- */
-closeDetails = async (current) => {
-
-  // Jump to divs start position if details was closed by user
-  let info = document.getElementById('info');
-  if (current.hasAttribute('open')) {
-    scrollPage(info);
-    return;
+    row.appendChild(col);
   }
 
-  // Close all other details elements except current
-  let details = document.querySelectorAll("details");
-  for (let i = 0; i < details.length; i++) {
-    if (details[i] != current) {
-      details[i].open = false;
-    }
-  }
-
-  // Scroll page when promise is resolved
-  await new Promise(resolve => setTimeout(resolve, 100));
-  scrollPage(current);
-
-};
-
-
-
-/**
- * Scroll to a specific element
- * 
- * @function scrollPage
- * @param element Selector of the element for scrolling to
- * 
- */
-scrollPage = (element) => {
-
-  // Prepare variables
-  let targetY = element.offsetTop - 70;
-  let currentY = window.pageYOffset;
-  let step = (targetY - currentY) / 20;
-
-  // Proceed scrolling
-  let intervalId = setInterval(function() {
-    currentY += step;
-    window.scrollTo(0, currentY);
-    if (step > 0 && currentY >= targetY || step < 0 && currentY <= targetY) {
-      clearInterval(intervalId);
-    }
-  }, 10);
-
-};
-
-
-
-
-/**
- * Handle progress for auto generating
- * 
- * @function handleAuto
- * 
- */
-handleAuto = () => {
-
-  // Check completeness
-  let title = document.getElementById('auto-title');
-  let text = document.getElementById('auto-text');
-  let sub = document.getElementById('auto-sub');
-
-  if ( !checkContent([title, text]) ) {
-    document.getElementById('auto-error').style.display = 'block';
-    return;
-  }
-
-  // Close error message
-  closeMsg('auto-error');
-
-  // Check and prepare interval
-  let interval = document.getElementById('auto-interval').value;
-  interval = Math.round(interval);
-  if (interval < 2) interval = 2;
-
-  // Prepare content
-  let prefixCheck = document.getElementById('prefix').checked;
-  let questionTitle = prefixCheck ? prefix + title.value : title.value;
-  let questionText = generateOutput(text.value, interval).replace(/\n/g, '</p><p>');
-  let questionSub = sub.value.length > 0 ? '</p><p><sub>' + sub.value + '</sub>' : '';
-
-  let content = 
-    `<?xml version="1.0" encoding="UTF-8"?>
-    <quiz>
-      <question type="cloze">
-        <name>
-          <text>${questionTitle}</text>
-        </name>
-        <questiontext format="html">
-          <text><![CDATA[<p>${questionText}${questionSub}</p>]]></text>
-        </questiontext>
-        <generalfeedback format="html">
-          <text></text>
-        </generalfeedback>
-        <penalty>0</penalty>
-        <hidden>0</hidden>
-        <idnumber></idnumber>
-      </question>
-    </quiz>`;
-
-  // Start download
-  downloadQuiz(content, prefix + title.value);
-
-};
-
-
-
-/**
- * Handle progress for manual generating
- * 
- * @function handleManual
- * 
- */
-handleManual = () => {
-
-  // Check completeness
-  let text = document.getElementById('manual-text');
-
-  if ( !checkContent([text]) ) {
-    document.getElementById('manual-error').style.display = 'block';
-    return;
-  }
-
-  // Close error message
-  closeMsg('manual-error');
-
-  // Check and prepare interval
-  let interval = document.getElementById('manual-interval').value;
-  interval = Math.round(interval);
-  if (interval < 2) interval = 2;
-
-  // Create content
-  let content = generateOutput(text.value, interval);
-  document.getElementById('ct-gaptext').value = content;
-  copyClipboard();
-
-};
-
-
-
-/**
- * Check text content of necessary inputs
- * 
- * @function checkContent
- * @param {array} stringArray All necessary inputs
- * @returns {boolean} Check State of text content
- * 
- */
-checkContent = (stringArray) => {
-
-  let check = true;
-  for (let i = 0; i < stringArray.length; i ++) {
-      if (stringArray[i].value === '') check = false;
-  }
-  return check;
-
-};
-
-
-
-/**
- * Generate output from text
- * 
- * @function generateOutput
- * @param {string} text Content to prepare for the output
- * @param {number} count Spacing of the seperated words
- * @returns output Modified text
- * 
-*/
-generateOutput = (text, interval) => { 
-
-  const subindex = text.search(/[.?!]/);
-  let output = text.substring(0, subindex + 1);
-  let sentences = text.substring(subindex + 1);
-  let words = sentences.match(/[\wÄäÖöÜü'\n]+|[^\s\w']+|\s/g);
-  let count = 0;
-
-  for (let i = 0; i < words.length; i++) {
-
-    if (words[i] === "\n" | words[i].length < 2) {
-      output += words[i];
-    } else {
-      count++;
-      output += count < interval 
-        ? words[i] 
-        : ( count = 0, prepareGap(words[i]) );
-    }
-
-  }
-
-  return output;
-
-};
-
-
-
-/**
- * Prepare gap
- * 
- * @function prepareGap
- * @param {string} element Content to prepare for the output
- * @returns Modified element
- * 
- * @hint For words with an odd number of letters, the gap gets larger by using Math.floor()
- * @hint Maybe an option to choose the Math.ceil() method was useful
- * 
-*/
-prepareGap = (element) => {
-
-  let halfLength = element.length % 2 == 1 
-    ? Math.floor(element.length / 2) 
-    : element.length / 2;
-  let firstHalf = element.substring(0, halfLength);
-  let secondHalf = element.substring(halfLength);
-  
-  return firstHalf + "{1:SA:=" + secondHalf + "}";
-
-};
-
-
-/**
- * Round letters up or down
- * 
- * @function roundLetters
- * @param {number} x Number of letters for rounding
- * @returns Rounded letters
- * 
- * @todo Used for later, there are a few things to do:
- * Add a select field within the html part
- * Implement call in the prepareGap(element) function
- * Lead auto or manual generating mode through the functions
- * 
-*/
-roundLetters = (x) => {
-
-  const method = round.value;
-
-  switch (method) {
-    case "floor":
-      return Math.floor(x);
-    case "ceil":
-      return Math.ceil(x);
-    case "random":
-      return Math.random() < 0.5 ? Math.floor(x) : Math.ceil(x);
-  }
-
-};
-
-
-
-/**
- * Download quiz
- * 
- * @function downloadQuiz
- * @param {string} input Content for putting into the download file
- * @param {string} filename Designation for the quiz file
- * 
-*/
-downloadQuiz = (input, filename) => { 
-
-  let blob = new Blob([input], {type:'text/plain'});
-  let a = document.createElement("a");
-  a.download = filename + '.xml';
-  a.href = window.URL.createObjectURL(blob);
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-
-};
-
-
-
-/**
- * Copy the content of the textarea to the clipboard
- * 
- * @function copyClipboard
- * 
- */
-copyClipboard = () => {
-
-  document.getElementById('ct-gaptext').select();
-  document.execCommand('copy');
-  let content = document.getElementById("clipboardInfo");
-  setTimeout(function () {
-    content.classList.add("clipboardConfirm");
-  }, 50)
-  setTimeout(function () {
-    content.classList.remove("clipboardConfirm");
-    document.getSelection().removeAllRanges();
-  }, 1400)
-
-};
-
-
-
-/**
- * Close infobox for errors
- * 
- * @function closeMsg
- * @param item Id for the item to close
- * 
- */
-closeMsg = (item) => {
-  document.getElementById(item).style.display = 'none';
-};
-
-
-
-/**
- * Reset content for corresponding mode
- * 
- * @function resetContent
- * @param mode Handle auto or manual content
- */
-resetContent = (mode) => {
-
-  if (mode === 'auto') {
-    closeMsg('auto-error');
-    document.getElementById('prefix').checked = 'true';
-    document.getElementById('auto-title').value = '';
-    document.getElementById('auto-text').value = '';
-    document.getElementById('auto-interval').value = '2';
-  } else if (mode === 'manual') {
-    closeMsg('manual-error');
-    document.getElementById('manual-text').value = '';
-    document.getElementById('ct-gaptext').value = '';
-    document.getElementById('manual-interval').value = '2';
-  } 
+  const header = document.querySelector('#topofscroll');
+  header.insertAdjacentElement("beforeend", row);
+  row.style.position = "sticky";
+  row.style.bottom = "5px";
 
 };
